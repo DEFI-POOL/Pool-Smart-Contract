@@ -22,6 +22,17 @@ import "../utils/MappedSinglyLinkedList.sol";
 import "./PrizePoolInterface.sol";
 
 
+/** 
+@title Users enter the pool by depositing and leave the pool by withdrawing from this contract. 
+Assets are deposited into a yield source and the contract exposes interest to Prize Strategy to select winner.  
+*/
+
+/**
+@notice Accounting is managed using Controlled Tokens, 
+whose mint and burn functions can only be called by this contract. 
+*/
+
+/// @dev Must be inherited to provide specific yield-bearing asset control, such as Compound cTokens
 
 abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, ReentrancyGuardUpgradeable, TokenControllerInterface, IERC721ReceiverUpgradeable {
 
