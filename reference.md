@@ -1,0 +1,1 @@
+UserPool = PrizePool
