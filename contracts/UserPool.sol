@@ -41,4 +41,69 @@ abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, Reentrancy
     using SafeERC20Upgradeable for IERC721Upgradeable;
     using MappedSinglyLinkedList for MappedSinglyLinkedList.Mapping;
     using ERC165CheckerUpgradeable for address;
+
+    /// @dev Emitted when an instance is initialized
+
+    event Initialized(
+        address reserveRegistry,
+        uint256 maxExitFee
+    );
+
+    /// @dev Event emitted when controlled token is added
+    event ControlledTokenAdded(
+        ControlledTokenInterface indexed token
+    );
+
+    /// @dev Emitted when reserve is captured.
+    event ReserveFeeCaptured(
+        uint256 amount
+    );
+
+    /// @dev Reserve to which reserve fees are sent
+    RegistryInterface public reserveRegistry;
+
+    /// @dev An array of all the controlled tokens
+    ControlledTokenInterface[] internal _tokens;
+
+    /// @dev The Prize Strategy that this Prize Pool is bound to.
+    TokenListenerInterface public prizeStrategy;
+
+    /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
+    /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
+    uint256 public maxExitFee;
+
+    /// @notice Initializes the  UserPool
+    /// @param _controlledTokens Array of ControlledTokens that are controlled by this Pool.
+    /// @param _maxExitFee The maximum exit fee size
+  
+    function initialize (
+        RegistryInterface _reserveRegistry,
+        ControlledTokenInterface[] memory _controlledTokens,
+        uint256 _maxExitFee
+    )
+        public
+        initializer {
+
+        require(address(_reserveRegistry) != address(0), "UserPool/reserveRegistry-not-zero");
+        uint256 controlledTokensLength = _controlledTokens.length;
+        _tokens = new ControlledTokenInterface[](controlledTokensLength);
+
+        for (uint256 i = 0; i < controlledTokensLength; i++) {
+        ControlledTokenInterface controlledToken = _controlledTokens[i];
+        _addControlledToken(controlledToken, i);
+        }
+        __Ownable_init();
+        __ReentrancyGuard_init();
+        _setLiquidityCap(uint256(-1));
+
+        reserveRegistry = _reserveRegistry;
+        maxExitFee = _maxExitFee;
+
+        emit Initialized(
+            address(_reserveRegistry),
+            maxExitFee
+        );
+    }
+
 }
+
