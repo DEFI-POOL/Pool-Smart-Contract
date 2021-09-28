@@ -35,5 +35,10 @@ whose mint and burn functions can only be called by this contract.
 /// @dev Must be inherited to provide specific yield-bearing asset control, such as Compound cTokens
 
 abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, ReentrancyGuardUpgradeable, TokenControllerInterface, IERC721ReceiverUpgradeable {
-
+    using SafeMathUpgradeable for uint256;
+    using SafeCastUpgradeable for uint256;
+    using SafeERC20Upgradeable for IERC20Upgradeable;
+    using SafeERC20Upgradeable for IERC721Upgradeable;
+    using MappedSinglyLinkedList for MappedSinglyLinkedList.Mapping;
+    using ERC165CheckerUpgradeable for address;
 }
