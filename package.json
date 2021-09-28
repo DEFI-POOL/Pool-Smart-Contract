@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/DEFI-POOL/Pool-Smart-Contract/issues"
   },
-  "homepage": "https://github.com/DEFI-POOL/Pool-Smart-Contract#readme"
+  "homepage": "https://github.com/DEFI-POOL/Pool-Smart-Contract#readme",
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.3.2"
+  }
 }
