@@ -51,9 +51,17 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return The actual exit fee paid
 
     function withdrawInstantlyFrom(address from, uint256 amount, address controlledToken,  uint256 maximumExitFee) {
-        
+
     }
 
+    /// @notice Updates the Prize Strategy when tokens are transferred between holders.
+    /// @param from The address the tokens are being transferred from (0 if minting)
+    /// @param to The address the tokens are being transferred to (0 if burning)
+    /// @param amount The amount of tokens being trasferred
+
+    function beforeTokenTransfer(address from, address to, uint256 amount) {
+        
+    }
 
 
 
