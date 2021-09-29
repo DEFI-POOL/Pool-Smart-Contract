@@ -40,7 +40,24 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @param referrer The referrer of the deposit (optional)
 
     function depositTo(address to, uint256 amount, address controlledToken, address referrer) {
+
+    }
+
+    /// @notice Withdraw assets from the UserPool instantly.  A fairness fee may be charged for an early exit.
+    /// @param from The address to redeem tokens from.
+    /// @param amount The amount of tokens to redeem for assets.
+    /// @param controlledToken (contract) The address of the token to redeem
+    /// @param maximumExitFee The maximum exit fee the caller is willing to pay.  This should be pre-calculated by the calculateExitFee() fxn.
+    /// @return The actual exit fee paid
+
+    function withdrawInstantlyFrom(address from, uint256 amount, address controlledToken,  uint256 maximumExitFee) {
         
     }
+
+
+
+
+
+
 }
 
