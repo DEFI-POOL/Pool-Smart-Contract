@@ -1,0 +1,29 @@
+{
+  "name": "pool-smart-contract",
+  "version": "1.0.0",
+  "description": "Smart contract for DEFI POOL project",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEFI-POOL/Pool-Smart-Contract.git"
+  },
+  "author": "George-Shammar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DEFI-POOL/Pool-Smart-Contract/issues"
+  },
+  "homepage": "https://github.com/DEFI-POOL/Pool-Smart-Contract#readme",
+  "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.3.2",
+    "@pooltogether/fixed-point": "1.0.0-beta.2",
+    "@pooltogether/pooltogether-rng-contracts": "1.0.0",
+    "@pooltogether/uniform-random-number": "1.0.0-beta.1",
+    "@pooltogether/yield-source-interface": "^1.0.1"
+  }
+}

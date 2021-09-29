@@ -1,0 +1,2 @@
+UserPool = PrizePool
+maxExitFeeMantissa = maxExitFee
