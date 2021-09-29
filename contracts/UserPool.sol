@@ -151,9 +151,15 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @param _prizeStrategy The new prize strategy
 
     function _setPrizeStrategy() {
-        
+
     }
 
+    /// @dev Gets the current time as represented by the current block
+    /// @return The timestamp of the current block
+
+    function _currentTime() internal virtual view returns (uint256) {
+        
+    }
 
 }
 
