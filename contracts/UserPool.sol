@@ -5,8 +5,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/IERC721ReceiverUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
@@ -99,6 +97,16 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     }
 
+    /// @notice Calculates the early exit fee for the given amount
+    /// @param from The user who is withdrawing
+    /// @param controlledToken The type of collateral being withdrawn
+    /// @param amount The amount of collateral to be withdrawn
+    /// @return exitFee The exit fee
+    /// @return burnedCredit The user's credit that was burned
+
+    function calculateEarlyExitFee(address from, address controlledToken, uint256 amount) {
+        
+    }
 
 }
 
