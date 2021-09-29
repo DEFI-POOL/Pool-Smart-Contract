@@ -46,7 +46,7 @@ abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, Reentrancy
 
     event Initialized(
         address reserveRegistry,
-        uint256 maxExitFee
+        uint256 maxExitFeeMantissa
     );
 
     /// @dev Event emitted when controlled token is added
@@ -70,16 +70,16 @@ abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, Reentrancy
 
     /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
     /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
-    uint256 public maxExitFee;
+    uint256 public maxExitFeeMantissa;
 
     /// @notice Initializes the  UserPool
     /// @param _controlledTokens Array of ControlledTokens that are controlled by this Pool.
-    /// @param _maxExitFee The maximum exit fee size
+    /// @param _maxExitFeeMantissa The maximum exit fee size
   
     function initialize (
         RegistryInterface _reserveRegistry,
         ControlledTokenInterface[] memory _controlledTokens,
-        uint256 _maxExitFee
+        uint256 _maxExitFeeMantissa
     )
         public
         initializer {
@@ -97,11 +97,11 @@ abstract contract UserPool is PrizePoolInterface, OwnableUpgradeable, Reentrancy
         _setLiquidityCap(uint256(-1));
 
         reserveRegistry = _reserveRegistry;
-        maxExitFee = _maxExitFee;
+        maxExitFeeMantissa = _maxExitFeeMantissa;
 
         emit Initialized(
             address(_reserveRegistry),
-            maxExitFee
+            maxExitFeeMantissa
         );
     }
 
