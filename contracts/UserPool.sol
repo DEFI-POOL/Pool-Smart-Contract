@@ -84,8 +84,18 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @notice Captures any available interest as award balance.
     /// @dev This function also captures the reserve fees.
     /// @return The total amount of assets to be awarded for the current prize
-    
+
     function captureAwardBalance() {
+
+    }
+
+    /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
+    /// @param to The user who is receiving the tokens
+    /// @param amount The amount of tokens they are receiving
+    /// @param controlledToken (contract) The token that is going to be minted
+    /// @param referrer The user who referred the minting
+
+    function _mint(address to, uint256 amount, address controlledToken, address referrer) {
 
     }
 
