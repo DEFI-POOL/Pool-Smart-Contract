@@ -81,6 +81,13 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
         
     }
 
+    /// @notice Captures any available interest as award balance.
+    /// @dev This function also captures the reserve fees.
+    /// @return The total amount of assets to be awarded for the current prize
+    
+    function captureAwardBalance() {
+
+    }
 
 
 }
