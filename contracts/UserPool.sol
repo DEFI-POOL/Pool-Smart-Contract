@@ -142,9 +142,16 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     }
 
     /// @dev To be called inside setLiquidityCap.
-    
+
     function _setLiquidityCap(uint256 _liquidityCap) internal {
 
+    }
+
+    /// @notice Sets the prize strategy of the UserPool.  Only callable by the owner.
+    /// @param _prizeStrategy The new prize strategy
+
+    function _setPrizeStrategy() {
+        
     }
 
 
