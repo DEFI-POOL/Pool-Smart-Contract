@@ -73,6 +73,14 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     }
 
+    /// @notice Returns the balance that is available to award.
+    /// @dev captureAwardBalance() should be called first
+    /// @return The total amount of assets to be awarded for the current prize
+
+    function awardBalance() {
+        
+    }
+
 
 
 }
