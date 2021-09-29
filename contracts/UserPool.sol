@@ -60,10 +60,18 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @param amount The amount of tokens being trasferred
 
     function beforeTokenTransfer(address from, address to, uint256 amount) {
-        
+
     }
 
+    /// @notice Called by the prize strategy to award prizes.
+    /// @dev The amount awarded must be less than the awardBalance()
+    /// @param to The address of the winner that receives the award
+    /// @param amount The amount of assets to be awarded
+    /// @param controlledToken (contract) The address of the asset token being awarded
 
+    function award(address to, uint256 amount, address controlledToken) {
+
+    }
 
 
 
