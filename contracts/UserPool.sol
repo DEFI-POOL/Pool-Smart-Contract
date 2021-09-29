@@ -158,6 +158,13 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return The timestamp of the current block
 
     function _currentTime() internal virtual view returns (uint256) {
+
+    }
+
+    /// @notice The total of all controlled tokens
+    /// @return The current total of all tokens
+
+    function accountedBalance() {
         
     }
 
