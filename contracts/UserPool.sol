@@ -105,7 +105,16 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return burnedCredit The user's credit that was burned
 
     function calculateEarlyExitFee(address from, address controlledToken, uint256 amount) {
-        
+
+    }
+
+    /// @notice Estimates the amount of time it will take for a given amount of funds to accrue the given amount of credit.
+    /// @param _principal The principal amount on which interest is accruing
+    /// @param _interest The amount of interest that must accrue
+    /// @return durationSeconds The duration of time it will take to accrue the given amount of interest, in seconds.
+    
+    function estimateCreditAccrualTime(address _controlledToken, uint256 _principal, uint256 _interest) {
+
     }
 
 }
