@@ -117,5 +117,16 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     }
 
+    /// @notice Burns a users credit.
+    /// @param user The user whose credit should be burned
+    /// @param credit The amount of credit to burn
+    /// @dev To be called inside _burn function
+
+    function _burnCredit(address user, address controlledToken, uint256 credit) {
+
+    }
+
+    
+
 }
 
