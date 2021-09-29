@@ -165,6 +165,14 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return The current total of all tokens
 
     function accountedBalance() {
+
+    }
+
+    /// @dev Checks if the Prize Pool can receive liquidity based on the current cap
+    /// @param _amount The amount of liquidity to be added to the Prize Pool
+    /// @return True if the Prize Pool can receive the specified amount of liquidity
+
+    function _canAddLiquidity(uint256 _amount) internal view returns (bool) {
         
     }
 
