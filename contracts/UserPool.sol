@@ -126,7 +126,27 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     }
 
+    /// @notice Returns the credit balance for a given user.  Not that this includes both minted credit and pending credit.
+    /// @param user The user whose credit balance should be returned
+    /// @return The balance of the users credit
+
+    function balanceOfCredit(address user, address controlledToken) {
+        
+    }
+
+    /// @notice Allows the Governor to set a cap on the amount of liquidity that he pool can hold
+    /// @param _liquidityCap The new liquidity cap for the prize pool
+  
+    function setLiquidityCap(uint256 _liquidityCap) {
+
+    }
+
+    /// @dev To be called inside setLiquidityCap.
     
+    function _setLiquidityCap(uint256 _liquidityCap) internal {
+
+    }
+
 
 }
 
