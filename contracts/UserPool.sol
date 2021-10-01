@@ -40,6 +40,12 @@ contract UserPool is Ownable, ReentrancyGuard {
         uint256 liquidityCap
     );
 
+    /// @dev Emitted when an instance is initialized
+    event Initialized(
+        address reserveRegistry,
+        uint256 maxExitFeeMantissa
+    );
+
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
     constructor (address _reserveRegistry, uint256 _maxExitFeeMantissa) {
 
