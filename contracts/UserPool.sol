@@ -29,6 +29,10 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     using SafeCastUpgradeable for uint256;
     using SafeERC20Upgradeable for IERC20Upgradeable;
 
+    function initialize () public initializer {
+
+    }
+
     /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
     /// @return The underlying balance of assets
 
