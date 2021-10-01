@@ -29,6 +29,10 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     using SafeCastUpgradeable for uint256;
     using SafeERC20Upgradeable for IERC20Upgradeable;
 
+
+    /// @dev The total amount of funds that the prize pool can hold.
+    uint256 public liquidityCap;
+
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
     function initialize () public initializer {
 
@@ -40,7 +44,7 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
     /// @param _liquidityCap The new liquidity cap for the prize pool
-    
+
     function setLiquidityCap(uint256 _liquidityCap) external onlyOwner {
         _setLiquidityCap(_liquidityCap);
     }
