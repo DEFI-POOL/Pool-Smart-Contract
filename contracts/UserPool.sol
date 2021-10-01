@@ -30,7 +30,7 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     using SafeERC20Upgradeable for IERC20Upgradeable;
 
 
-    /// @dev The total amount of funds that the prize pool can hold.
+    /// @dev The total amount of funds that the pool can hold.
     uint256 public liquidityCap;
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
@@ -49,8 +49,10 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
         _setLiquidityCap(_liquidityCap);
     }
 
-    /// @dev Returns the address of the underlying ERC20 asset
-    /// @return The address of the asset
+    function _setLiquidityCap(uint256 _liquidityCap) internal {
+        liquidityCap = _liquidityCap;
+        emit LiquidityCapSet(_liquidityCap);
+    }
 
    
     /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
