@@ -29,6 +29,7 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     using SafeCastUpgradeable for uint256;
     using SafeERC20Upgradeable for IERC20Upgradeable;
 
+    /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
     function initialize () public initializer {
 
     }
