@@ -70,9 +70,8 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @param to The address receiving the newly minted UserPool tokens
     /// @param amount The amount of assets to deposit
     /// @param controlledToken (contract) The address of the type of token the user is minting
-    /// @param referrer The referrer of the deposit (optional)
 
-    function depositTo(address to, uint256 amount, address controlledToken, address referrer) {
+    function depositTo(address to, uint256 amount, address controlledToken ) external nonReentrant {
 
     }
 
