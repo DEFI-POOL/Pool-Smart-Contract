@@ -35,6 +35,9 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @dev The total amount of funds that the pool can hold.
     uint256 public liquidityCap;
 
+    /// @dev Reserve to which reserve fees are sent
+    RegistryInterface public reserveRegistry;
+
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
         uint256 liquidityCap
