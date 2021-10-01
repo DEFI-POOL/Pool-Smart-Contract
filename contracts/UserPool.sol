@@ -24,6 +24,8 @@ whose mint and burn functions can only be called by this contract.
 
 contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
+    using SafeMathUpgradeable for uint256;
+
     /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
     /// @return The underlying balance of assets
 
@@ -180,6 +182,8 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return The ERC20 asset token
   
     function _token() internal virtual view returns (IERC20Upgradeable);
+
+    
 
 
 }
