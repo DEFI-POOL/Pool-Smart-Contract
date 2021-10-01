@@ -38,6 +38,13 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
          _setLiquidityCap(uint256(-1));
     }
 
+    /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
+    /// @param _liquidityCap The new liquidity cap for the prize pool
+    
+    function setLiquidityCap(uint256 _liquidityCap) external onlyOwner {
+        _setLiquidityCap(_liquidityCap);
+    }
+
     /// @dev Returns the address of the underlying ERC20 asset
     /// @return The address of the asset
 
