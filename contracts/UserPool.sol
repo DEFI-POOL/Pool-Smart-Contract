@@ -35,6 +35,10 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev Reserve to which reserve fees are sent
     address public reserveRegistry;
 
+    /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
+    /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
+    uint256 public maxExitFee;
+
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
         uint256 liquidityCap
@@ -43,18 +47,19 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev Emitted when an instance is initialized
     event Initialized(
         address reserveRegistry,
-        uint256 maxExitFeeMantissa
+        uint256 maxExitFee
     );
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    constructor (address _reserveRegistry, uint256 _maxExitFeeMantissa) {
+    constructor (address _reserveRegistry, uint256 _maxExitFee) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
         reserveRegistry = _reserveRegistry;
+        maxExitFee = _maxExitFee;
 
         emit Initialized(
             address(_reserveRegistry),
-            maxExitFeeMantissa
+            maxExitFee
         );
     }
 
