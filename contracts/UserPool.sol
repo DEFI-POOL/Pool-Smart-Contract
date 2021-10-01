@@ -9,8 +9,6 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
 
-import "./registry/RegistryInterface.sol";
-
 
 /** 
 @title Users enter the pool by depositing and leave the pool by withdrawing from this contract. 
