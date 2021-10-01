@@ -50,10 +50,13 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
         uint256 _maxExitFeeMantissa
     ) public initializer {
 
+        require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
 
          __Ownable_init();
         __ReentrancyGuard_init();
          _setLiquidityCap(uint256(liquidityCap-1));
+
+         reserveRegistry = _reserveRegistry;
     }
 
     /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
