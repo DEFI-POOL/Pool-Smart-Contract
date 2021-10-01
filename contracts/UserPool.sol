@@ -2,12 +2,11 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeCastUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeCast.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
 
 
@@ -23,28 +22,45 @@ whose mint and burn functions can only be called by this contract.
 
 /// @dev Must be inherited to provide specific yield-bearing asset control, such as Compound cTokens
 
-contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
+contract UserPool is Ownable, ReentrancyGuard {
 
-    using SafeMathUpgradeable for uint256;
-    using SafeCastUpgradeable for uint256;
-    using SafeERC20Upgradeable for IERC20Upgradeable;
+    using SafeMath for uint256;
+    using SafeCast for uint256;
+    using SafeERC20 for IERC20;
 
 
     /// @dev The total amount of funds that the pool can hold.
     uint256 public liquidityCap;
+
+    /// @dev Reserve to which reserve fees are sent
+    address public reserveRegistry;
+
+    /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
+    /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
+    uint256 public maxExitFee;
 
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
         uint256 liquidityCap
     );
 
+    /// @dev Emitted when an instance is initialized
+    event Initialized(
+        address reserveRegistry,
+        uint256 maxExitFee
+    );
+
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    function initialize () public initializer {
+    constructor (address _reserveRegistry, uint256 _maxExitFee) {
 
+        require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
+        reserveRegistry = _reserveRegistry;
+        maxExitFee = _maxExitFee;
 
-         __Ownable_init();
-        __ReentrancyGuard_init();
-         _setLiquidityCap(uint256(liquidityCap-1));
+        emit Initialized(
+            address(_reserveRegistry),
+            maxExitFee
+        );
     }
 
     /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
@@ -70,9 +86,8 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @param to The address receiving the newly minted UserPool tokens
     /// @param amount The amount of assets to deposit
     /// @param controlledToken (contract) The address of the type of token the user is minting
-    /// @param referrer The referrer of the deposit (optional)
 
-    function depositTo(address to, uint256 amount, address controlledToken, address referrer) {
+    function depositTo(address to, uint256 amount, address controlledToken ) external nonReentrant {
 
     }
 
