@@ -45,6 +45,11 @@ contract UserPool is Ownable, ReentrancyGuard {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
         reserveRegistry = _reserveRegistry;
+
+        emit Initialized(
+            address(_reserveRegistry),
+            maxExitFeeMantissa
+        );
     }
 
     /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
