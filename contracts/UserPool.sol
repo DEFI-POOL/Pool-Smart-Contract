@@ -3,10 +3,11 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/SafeCastUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/introspection/ERC165CheckerUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeCastUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
 
 
@@ -24,6 +25,40 @@ whose mint and burn functions can only be called by this contract.
 
 contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
+    using SafeMathUpgradeable for uint256;
+    using SafeCastUpgradeable for uint256;
+    using SafeERC20Upgradeable for IERC20Upgradeable;
+
+
+    /// @dev The total amount of funds that the pool can hold.
+    uint256 public liquidityCap;
+
+    /// @dev Event emitted when the Liquidity Cap is set
+    event LiquidityCapSet(
+        uint256 liquidityCap
+    );
+
+    /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
+    function initialize () public initializer {
+
+
+         __Ownable_init();
+        __ReentrancyGuard_init();
+         _setLiquidityCap(uint256(liquidityCap-1));
+    }
+
+    /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
+    /// @param _liquidityCap The new liquidity cap for the prize pool
+    function setLiquidityCap(uint256 _liquidityCap) external onlyOwner {
+        _setLiquidityCap(_liquidityCap);
+    }
+
+    function _setLiquidityCap(uint256 _liquidityCap) internal {
+        liquidityCap = _liquidityCap;
+        emit LiquidityCapSet(_liquidityCap);
+    }
+
+   
     /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
     /// @return The underlying balance of assets
 
@@ -180,6 +215,8 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @return The ERC20 asset token
   
     function _token() internal virtual view returns (IERC20Upgradeable);
+
+    
 
 
 }
