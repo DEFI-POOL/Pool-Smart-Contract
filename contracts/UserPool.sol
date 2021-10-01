@@ -10,6 +10,8 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeab
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
 
+import "./registry/RegistryInterface.sol";
+
 
 /** 
 @title Users enter the pool by depositing and leave the pool by withdrawing from this contract. 
@@ -39,7 +41,11 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     );
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    function initialize () public initializer {
+    function initialize (
+        RegistryInterface _reserveRegistry,
+        ControlledTokenInterface[] memory _controlledTokens,
+        uint256 _maxExitFeeMantissa
+    ) public initializer {
 
 
          __Ownable_init();
