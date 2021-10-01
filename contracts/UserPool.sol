@@ -41,11 +41,10 @@ contract UserPool is Ownable, ReentrancyGuard {
     );
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    constructor (RegistryInterface _reserveRegistry, ControlledTokenInterface[] memory _controlledTokens,uint256 _maxExitFeeMantissa) {
+    constructor (address _reserveRegistry, ControlledTokenInterface[] memory _controlledTokens,uint256 _maxExitFeeMantissa) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
-
-         reserveRegistry = _reserveRegistry;
+        reserveRegistry = _reserveRegistry;
     }
 
     /// @notice Allows the Governor to set a cap on the amount of liquidity that the pool can hold
