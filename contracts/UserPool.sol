@@ -2,12 +2,11 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeCastUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeCast.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
 
 import "./registry/RegistryInterface.sol";
@@ -25,18 +24,18 @@ whose mint and burn functions can only be called by this contract.
 
 /// @dev Must be inherited to provide specific yield-bearing asset control, such as Compound cTokens
 
-contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
+contract UserPool is Ownable, ReentrancyGuard {
 
-    using SafeMathUpgradeable for uint256;
-    using SafeCastUpgradeable for uint256;
-    using SafeERC20Upgradeable for IERC20Upgradeable;
+    using SafeMath for uint256;
+    using SafeCast for uint256;
+    using SafeERC20 for IERC20;
 
 
     /// @dev The total amount of funds that the pool can hold.
     uint256 public liquidityCap;
 
     /// @dev Reserve to which reserve fees are sent
-    RegistryInterface public reserveRegistry;
+    address public reserveRegistry;
 
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
@@ -44,17 +43,9 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     );
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    function initialize (
-        RegistryInterface _reserveRegistry,
-        ControlledTokenInterface[] memory _controlledTokens,
-        uint256 _maxExitFeeMantissa
-    ) public initializer {
+    constructor (RegistryInterface _reserveRegistry, ControlledTokenInterface[] memory _controlledTokens,uint256 _maxExitFeeMantissa) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
-
-         __Ownable_init();
-        __ReentrancyGuard_init();
-         _setLiquidityCap(uint256(liquidityCap-1));
 
          reserveRegistry = _reserveRegistry;
     }
