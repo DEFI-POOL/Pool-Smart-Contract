@@ -32,8 +32,16 @@ contract UserPool is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
     function initialize () public initializer {
 
+
+         __Ownable_init();
+        __ReentrancyGuard_init();
+         _setLiquidityCap(uint256(-1));
     }
 
+    /// @dev Returns the address of the underlying ERC20 asset
+    /// @return The address of the asset
+
+   
     /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
     /// @return The underlying balance of assets
 
