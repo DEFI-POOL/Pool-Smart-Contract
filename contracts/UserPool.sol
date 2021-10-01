@@ -41,7 +41,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     );
 
     /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    constructor (address _reserveRegistry, ControlledTokenInterface[] memory _controlledTokens,uint256 _maxExitFeeMantissa) {
+    constructor (address _reserveRegistry, uint256 _maxExitFeeMantissa) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
         reserveRegistry = _reserveRegistry;
