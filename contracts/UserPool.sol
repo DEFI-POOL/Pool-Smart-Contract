@@ -82,13 +82,28 @@ contract UserPool is Ownable, ReentrancyGuard {
     }
 
 
+   
+    
     /// @notice Deposit assets into the UserPool in exchange for UserPool tokens
     /// @param to The address receiving the newly minted UserPool tokens
     /// @param amount The amount of assets to deposit
-    /// @param controlledToken (contract) The address of the type of token the user is minting
 
-    function depositTo(address to, uint256 amount, address controlledToken ) external nonReentrant {
+    function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
 
+    }
+
+    /// @dev Function modifier to ensure the deposit amount does not exceed the liquidity cap (if set)
+    modifier canAddLiquidity(uint256 _amount) {
+        require(_canAddLiquidity(_amount), "UserPool/exceeds-liquidity-cap");
+        _;
+    }
+
+    /// @dev Checks if the UserPool can receive liquidity based on the current cap
+    /// @param _amount The amount of liquidity to be added to the UserPool
+    /// @return True if the UserPool can receive the specified amount of liquidity
+    function _canAddLiquidity(uint256 _amount) internal view returns (bool) {
+        uint256 tokenTotalSupply = _totalSupply;
+        return (tokenTotalSupply.add(_amount) <= liquidityCap);
     }
 
     /// @notice Withdraw assets from the UserPool instantly.  A fairness fee may be charged for an early exit.
@@ -183,19 +198,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     function balanceOfCredit(address user, address controlledToken) {
         
     }
-
-    /// @notice Allows the Governor to set a cap on the amount of liquidity that he pool can hold
-    /// @param _liquidityCap The new liquidity cap for the prize pool
-  
-    function setLiquidityCap(uint256 _liquidityCap) {
-
-    }
-
-    /// @dev To be called inside setLiquidityCap.
-
-    function _setLiquidityCap(uint256 _liquidityCap) internal {
-
-    }
+    
 
     /// @notice Sets the prize strategy of the UserPool.  Only callable by the owner.
     /// @param _prizeStrategy The new prize strategy
