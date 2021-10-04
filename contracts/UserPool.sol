@@ -81,13 +81,6 @@ contract UserPool is Ownable, ReentrancyGuard {
         emit LiquidityCapSet(_liquidityCap);
     }
 
-   
-    /// @dev Returns the total underlying balance of all assets. This includes both principal and interest.
-    /// @return The underlying balance of assets
-
-    function balance() external returns (uint256) {
-        
-    }
 
     /// @notice Deposit assets into the UserPool in exchange for UserPool tokens
     /// @param to The address receiving the newly minted UserPool tokens
