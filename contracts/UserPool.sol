@@ -53,8 +53,12 @@ contract UserPool is Ownable, ReentrancyGuard {
         uint256 maxExitFee
     );
 
-    /// @dev Use intialize instead of consturctor because of upgradeable libraries being used. The initialize function then calls open zeppelin's initializer.
-    constructor (address _reserveRegistry, uint256 _maxExitFee) {
+    /// @notice Initializes the User Pool
+    /// @param _controlledTokens Address ControlledToken that is controlled by this User Pool.
+    /// @param _maxExitFee The maximum exit fee size where applicable
+    /// @dev Reserve to which reserve fees are sent
+    
+    constructor (address _reserveRegistry, uint256 _maxExitFee, address _controlledTokens) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
         reserveRegistry = _reserveRegistry;
