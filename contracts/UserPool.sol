@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/math/SafeCast.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@pooltogether/fixed-point/contracts/FixedPoint.sol";
+
 
 
 /** 
@@ -38,6 +38,9 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
     /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
     uint256 public maxExitFee;
+
+    /// @dev Address of controlled tokens
+    address internal _tokens;
 
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
