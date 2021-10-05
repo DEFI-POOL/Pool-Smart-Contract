@@ -100,7 +100,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
         address operator = msg.sender;
-        _token().safeTransferFrom(operator, address(this), amount);
+        _BaseAsset.safeTransferFrom(operator, address(this), amount);
         _mint(to, amount);
     }
 
