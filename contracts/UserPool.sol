@@ -100,13 +100,11 @@ contract UserPool is Ownable, ReentrancyGuard {
     }
 
     /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
-    /// @param to The user who is receiving the tokens
-    /// @param amount The amount of tokens they are receiving
-    /// @param controlledToken (contract) The token that is going to be minted
-    /// @param referrer The user who referred the minting
+    /// @param to The user who is receiving the tokens.
+    /// @param amount The amount of tokens they are receiving.
 
     function _mint(address to, uint256 amount) internal {
-        FairyToken.mint(to, amount);
+        FairyToken.mint(to, amount);  // This error will be cleared when actual FRY contract address is used.
     }
 
     /// @dev Function modifier to ensure the deposit amount does not exceed the liquidity cap (if set)
