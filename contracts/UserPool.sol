@@ -42,11 +42,15 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
     uint256 public maxExitFee;
 
-// Remember to update this address to actual FairyToken's contract address.
+// Remember to update these addresses to actual contract address. Below are just place holder addresses.
 /// ==========================================================================
-    /// @dev Address of controlled Fairytoken. 
-    address internal FairyToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+    /// @dev Contract address of controlled Fairytoken. 
+    address internal _FairyToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+
+    /// @dev Contract address of the underlining asset.
+    address internal _BaseAsset = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
 /// ==========================================================================
+
 
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
@@ -96,6 +100,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
         address operator = msg.sender;
+        _token().safeTransferFrom(operator, address(this), amount);
         _mint(to, amount);
     }
 
@@ -104,7 +109,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param amount The amount of tokens they are receiving.
 
     function _mint(address to, uint256 amount) internal {
-        FairyToken.mint(to, amount);  // This error will be cleared when actual FRY contract address is used.
+        _FairyToken.mint(to, amount);  // This error will be cleared when actual FRY contract address is used.
     }
 
     /// @dev Function modifier to ensure the deposit amount does not exceed the liquidity cap (if set)
