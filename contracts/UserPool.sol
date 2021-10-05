@@ -63,6 +63,13 @@ contract UserPool is Ownable, ReentrancyGuard {
         uint256 maxExitFee
     );
 
+    /// @dev Event emitted when assets are deposited
+    event Deposited(
+        address indexed operator,
+        address indexed to,
+        uint256 amount
+    );
+
     /// @notice Initializes the User Pool.
     /// @param _controlledToken Address ControlledToken that is controlled by this User Pool.
     /// @param _maxExitFee The maximum exit fee size where applicable.
@@ -103,12 +110,14 @@ contract UserPool is Ownable, ReentrancyGuard {
         _BaseAsset.safeTransferFrom(operator, address(this), amount);
         _mint(to, amount);
         _supply(amount);
+
+        emit Deposited(operator, to, amount);
     }
 
     /// @notice Supplies asset tokens to the yield source.
     /// @param mintAmount The amount of asset tokens to be supplied
     function _supply(uint256 mintAmount) internal virtual {
-        
+
     }
 
     /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
