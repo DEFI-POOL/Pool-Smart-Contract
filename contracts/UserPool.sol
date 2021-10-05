@@ -102,6 +102,13 @@ contract UserPool is Ownable, ReentrancyGuard {
         address operator = msg.sender;
         _BaseAsset.safeTransferFrom(operator, address(this), amount);
         _mint(to, amount);
+        _supply(amount);
+    }
+
+    /// @notice Supplies asset tokens to the yield source.
+    /// @param mintAmount The amount of asset tokens to be supplied
+    function _supply(uint256 mintAmount) internal virtual {
+        
     }
 
     /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
