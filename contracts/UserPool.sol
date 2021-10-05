@@ -221,18 +221,11 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     }
 
-    /// @dev Checks if the UserPool can receive liquidity based on the current cap
-    /// @param _amount The amount of liquidity to be added to the Prize Pool
-    /// @return True if the UserPool can receive the specified amount of liquidity
-
-    function _canAddLiquidity(uint256 _amount) internal view returns (bool) {
-
-    }
-
     /// @notice Returns the ERC20 asset token used for deposits.
     /// @return The ERC20 asset token
   
-    function _token() internal virtual view returns (IERC20Upgradeable);
+    function _token() internal virtual view returns (IERC20);
+
 
     
 
