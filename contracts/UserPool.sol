@@ -32,6 +32,9 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev The total amount of funds that the pool can hold.
     uint256 public liquidityCap;
 
+    /// @notice The total supply of Fairy tokens.
+    uint256 private _totalSupply;
+
     /// @dev Reserve to which reserve fees are sent
     address public reserveRegistry;
 
@@ -53,10 +56,10 @@ contract UserPool is Ownable, ReentrancyGuard {
         uint256 maxExitFee
     );
 
-    /// @notice Initializes the User Pool
-    /// @param _controlledTokens Address ControlledToken that is controlled by this User Pool.
-    /// @param _maxExitFee The maximum exit fee size where applicable
-    /// @dev Reserve to which reserve fees are sent
+    /// @notice Initializes the User Pool.
+    /// @param _controlledToken Address ControlledToken that is controlled by this User Pool.
+    /// @param _maxExitFee The maximum exit fee size where applicable.
+    /// @dev Reserve to which reserve fees are sent.
     
     constructor (address _reserveRegistry, uint256 _maxExitFee, address _controlledToken) {
 
@@ -84,9 +87,9 @@ contract UserPool is Ownable, ReentrancyGuard {
 
    
     
-    /// @notice Deposit assets into the UserPool in exchange for UserPool tokens
-    /// @param to The address receiving the newly minted UserPool tokens
-    /// @param amount The amount of assets to deposit
+    /// @notice Deposit assets into the UserPool in exchange for FairyTokens.
+    /// @param to The address receiving the newly minted FairyTokens.
+    /// @param amount The amount of assets to deposit.
 
     function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
 
@@ -98,8 +101,8 @@ contract UserPool is Ownable, ReentrancyGuard {
         _;
     }
 
-    /// @dev Checks if the UserPool can receive liquidity based on the current cap
-    /// @param _amount The amount of liquidity to be added to the UserPool
+    /// @dev Checks if the UserPool can receive liquidity based on the current cap.
+    /// @param _amount The amount of liquidity to be added to the UserPool.
     /// @return True if the UserPool can receive the specified amount of liquidity
     function _canAddLiquidity(uint256 _amount) internal view returns (bool) {
         uint256 tokenTotalSupply = _totalSupply;
@@ -220,11 +223,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     function accountedBalance() {
 
     }
-
-    /// @notice Returns the ERC20 asset token used for deposits.
-    /// @return The ERC20 asset token
-  
-    function _token() internal virtual view returns (IERC20);
 
 
     
