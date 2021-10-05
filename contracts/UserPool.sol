@@ -42,8 +42,11 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
     uint256 public maxExitFee;
 
-    /// @dev Address of controlled tokens
-    address internal _tokens;
+// Remember to update this address to actual FairyToken's contract address.
+/// ==========================================================================
+    /// @dev Address of controlled Fairytoken. 
+    address internal FairyToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+/// ==========================================================================
 
     /// @dev Event emitted when the Liquidity Cap is set
     event LiquidityCapSet(
@@ -92,7 +95,18 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param amount The amount of assets to deposit.
 
     function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
+        address operator = msg.sender;
+        _mint(to, amount);
+    }
 
+    /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
+    /// @param to The user who is receiving the tokens
+    /// @param amount The amount of tokens they are receiving
+    /// @param controlledToken (contract) The token that is going to be minted
+    /// @param referrer The user who referred the minting
+
+    function _mint(address to, uint256 amount) internal {
+        FairyToken.mint(to, amount);
     }
 
     /// @dev Function modifier to ensure the deposit amount does not exceed the liquidity cap (if set)
@@ -152,16 +166,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @return The total amount of assets to be awarded for the current prize
 
     function captureAwardBalance() {
-
-    }
-
-    /// @notice Called to mint controlled tokens.  Ensures that token listener callbacks are fired.
-    /// @param to The user who is receiving the tokens
-    /// @param amount The amount of tokens they are receiving
-    /// @param controlledToken (contract) The token that is going to be minted
-    /// @param referrer The user who referred the minting
-
-    function _mint(address to, uint256 amount, address controlledToken, address referrer) {
 
     }
 
