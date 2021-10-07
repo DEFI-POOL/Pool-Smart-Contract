@@ -118,9 +118,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     function depositReserveBalance() public view returns (uint) {
         return depositReserve.balance;
     }
-    
-
-    
 
     /// @dev Function modifier to ensure the deposit amount does not exceed the liquidity cap (if set)
     modifier canAddLiquidity(uint256 _amount) {
@@ -146,15 +143,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     function withdrawInstantlyFrom(address from, uint256 amount, address controlledToken,  uint256 maximumExitFee) {
 
     }
-
-    /// @notice Updates the Prize Strategy when tokens are transferred between holders.
-    /// @param from The address the tokens are being transferred from (0 if minting)
-    /// @param to The address the tokens are being transferred to (0 if burning)
-    /// @param amount The amount of tokens being trasferred
-
-    function beforeTokenTransfer(address from, address to, uint256 amount) {
-
-    }
+    
 
     /// @notice Called by the prize strategy to award prizes.
     /// @dev The amount awarded must be less than the awardBalance()
@@ -182,67 +171,6 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     }
 
-    /// @notice Calculates the early exit fee for the given amount
-    /// @param from The user who is withdrawing
-    /// @param controlledToken The type of collateral being withdrawn
-    /// @param amount The amount of collateral to be withdrawn
-    /// @return exitFee The exit fee
-    /// @return burnedCredit The user's credit that was burned
-
-    function calculateEarlyExitFee(address from, address controlledToken, uint256 amount) {
-
-    }
-
-    /// @notice Estimates the amount of time it will take for a given amount of funds to accrue the given amount of credit.
-    /// @param _principal The principal amount on which interest is accruing
-    /// @param _interest The amount of interest that must accrue
-    /// @return durationSeconds The duration of time it will take to accrue the given amount of interest, in seconds.
-    
-    function estimateCreditAccrualTime(address _controlledToken, uint256 _principal, uint256 _interest) {
-
-    }
-
-    /// @notice Burns a users credit.
-    /// @param user The user whose credit should be burned
-    /// @param credit The amount of credit to burn
-    /// @dev To be called inside _burn function
-
-    function _burnCredit(address user, address controlledToken, uint256 credit) {
-
-    }
-
-    /// @notice Returns the credit balance for a given user.  Not that this includes both minted credit and pending credit.
-    /// @param user The user whose credit balance should be returned
-    /// @return The balance of the users credit
-
-    function balanceOfCredit(address user, address controlledToken) {
-        
-    }
-    
-
-    /// @notice Sets the prize strategy of the UserPool.  Only callable by the owner.
-    /// @param _prizeStrategy The new prize strategy
-
-    function _setPrizeStrategy() {
-
-    }
-
-    /// @dev Gets the current time as represented by the current block
-    /// @return The timestamp of the current block
-
-    function _currentTime() internal virtual view returns (uint256) {
-
-    }
-
-    /// @notice The total of all controlled tokens
-    /// @return The current total of all tokens
-
-    function accountedBalance() {
-
-    }
-
-
-    
 
 
 }
