@@ -45,9 +45,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     Fairy fairyContract;
     address internal _token = 0x0fC5025C764cE34df352757e82f7B5c4Df39A836;
 
-    /// @dev Contract address of the underlining asset.
-    address internal _BaseAsset = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
-
     /// @dev  Address that receives all depostis and supplies it to yield source.
     address depositReserve = 0xdD870fA1b7C4700F2BD7f44238821C26f7392148;
 /// ==========================================================================
