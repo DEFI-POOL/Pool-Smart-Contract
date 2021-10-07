@@ -75,15 +75,13 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param _maxExitFee The maximum exit fee size where applicable.
     /// @dev Reserve to which reserve fees are sent.
     
-    constructor (address _reserveRegistry, uint256 _maxExitFee, address _controlledToken) {
+    constructor (address _reserveRegistry) {
 
         require(address(_reserveRegistry) != address(0), "reserveRegistry must not be address 0");
         reserveRegistry = _reserveRegistry;
-        maxExitFee = _maxExitFee;
 
         emit Initialized(
-            address(_reserveRegistry),
-            maxExitFee
+            address(_reserveRegistry)
         );
     }
 
