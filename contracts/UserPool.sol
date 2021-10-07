@@ -133,14 +133,11 @@ contract UserPool is Ownable, ReentrancyGuard {
         return (tokenTotalSupply.add(_amount) <= liquidityCap);
     }
 
-    /// @notice Withdraw assets from the UserPool instantly.  A fairness fee may be charged for an early exit.
+    /// @notice Withdraw assets from the UserPool instantly.
     /// @param from The address to redeem tokens from.
     /// @param amount The amount of tokens to redeem for assets.
-    /// @param controlledToken (contract) The address of the token to redeem
-    /// @param maximumExitFee The maximum exit fee the caller is willing to pay.  This should be pre-calculated by the calculateExitFee() fxn.
-    /// @return The actual exit fee paid
 
-    function withdrawInstantlyFrom(address from, uint256 amount, address controlledToken,  uint256 maximumExitFee) {
+    function withdrawFromPool(address from, uint256 amount) public {
 
     }
     
@@ -151,7 +148,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param amount The amount of assets to be awarded
     /// @param controlledToken (contract) The address of the asset token being awarded
 
-    function award(address to, uint256 amount, address controlledToken) {
+    function award(address to, uint256 amount, address controlledToken) public {
 
     }
 
