@@ -101,8 +101,8 @@ contract UserPool is Ownable, ReentrancyGuard {
     function depositToPool(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
         require(msg.value > 0, "You must send in some ether to join the pool");
         payable(depositReserve).transfer(msg.value);
-
-        _supply(amount);
+        
+        _mintFairyToDepositor(msg.sender, msg.value);
 
         emit Deposited(operator, to, amount);
     }
