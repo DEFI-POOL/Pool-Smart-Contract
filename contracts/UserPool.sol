@@ -109,6 +109,11 @@ contract UserPool is Ownable, ReentrancyGuard {
         _mint(to, amount);
     }
 
+    function _mint(address to, uint256 amount) internal {
+        fairyContract = Fairy(_token);
+        fairyContract.mint(to, amount);
+    }
+
     function depositReserveBalance() public view returns (uint) {
         return depositReserve.balance;
     }
