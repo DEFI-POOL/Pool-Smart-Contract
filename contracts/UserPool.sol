@@ -177,7 +177,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev captureAwardBalance() should be called first
     /// @return The total amount of assets to be awarded for the current prize
 
-    function awardBalance() {
+    function awardBalance() public {
         
     }
 
@@ -185,7 +185,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev This function also captures the reserve fees.
     /// @return The total amount of assets to be awarded for the current prize
 
-    function captureAwardBalance() {
+    function captureAwardBalance() public {
 
     }
 
