@@ -105,6 +105,10 @@ contract UserPool is Ownable, ReentrancyGuard {
         emit Deposited(msg.sender, msg.value);
     }
 
+    function _mintFairyToDepositor(address to, uint256 amount) internal {
+        _mint(to, amount);
+    }
+
     function depositReserveBalance() public view returns (uint) {
         return depositReserve.balance;
     }
