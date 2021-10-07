@@ -147,12 +147,15 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     function _withdrawFromPool(address from, uint256 amount) internal {  // Remember to enforce security here later
         _burnFairyFromUser(from, amount);
-        // uint256 redeemed = _redeem(amount);  
-        // _redeem(amount) Recovers amount from yield source.
-         payable(from).transfer(amount);
-        // emit Withdrawal(_msgSender(), from, amount, redeemed);
+        uint256 redeemed = _redeem(amount);  // Recovers amount from yield source.
+         payable(from).transfer(redeemed);
+        emit Withdrawal(_msgSender(), from, amount, redeemed);
     }
     
+    // Not fully implemented function.
+    function _redeem(uint amount) pure internal returns(uint256) {
+        return amount;
+    }
 
     // /// @notice Redeems asset tokens from the yield source.
     // /// @param redeemAmount The amount of yield-bearing tokens to be redeemed
@@ -170,20 +173,6 @@ contract UserPool is Ownable, ReentrancyGuard {
         fairyContract = Fairy(_token);
         fairyContract.burn(from, amount);
     }
-
-    /// @notice Called by the prize strategy to award prizes.
-    /// @dev The amount awarded must be less than the awardBalance()
-    /// @param to The address of the winner that receives the award
-    /// @param amount The amount of assets to be awarded
-    /// @param controlledToken (contract) The address of the asset token being awarded
-
-    function award(address to, uint256 amount, address controlledToken) public {
-
-    }
-
-    /// @notice Returns the balance that is available to award.
-    /// @dev captureAwardBalance() should be called first
-    /// @return The total amount of assets to be awarded for the current prize
 
 
 
