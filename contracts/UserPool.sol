@@ -95,8 +95,6 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     
     /// @notice Deposit assets into the UserPool in exchange for FairyTokens as tickets.
-    /// @param to The address receiving the newly minted FairyTokens.
-    /// @param amount The amount of assets to deposit.
 
     function depositToPool() external nonReentrant  canAddLiquidity(msg.value){
         require(msg.value > 0, "You must send in some ether to join the pool");
@@ -104,7 +102,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
         _mintFairyToDepositor(msg.sender, msg.value);
 
-        emit Deposited(to, amount);
+        emit Deposited(msg.sender, msg.value);
     }
 
     /// @notice Supplies asset tokens to the yield source.
