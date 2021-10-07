@@ -69,6 +69,14 @@ contract UserPool is Ownable, ReentrancyGuard {
         uint256 amount
     );
 
+    /// @dev Event emitted when assets are withdrawn instantly
+  event Withdrawal(
+    address indexed operator,
+    address indexed from,
+    uint256 amount,
+    uint256 redeemed
+  );
+
     /// @notice Initializes the User Pool.
     /// @param _reserveRegistry Reserve to which reserve fees are sent.
     /// @dev Reserve to which reserve fees are sent.
@@ -140,6 +148,8 @@ contract UserPool is Ownable, ReentrancyGuard {
     function withdrawFromPool(address from, uint256 amount) public {  // Remember to enforce security here later
 
         _burnFairyFromUser(from, amount);
+
+        uint256 redeemed = _redeem(amount);
 
         emit Withdrawal(_msgSender(), from, amount, redeemed);
     }
