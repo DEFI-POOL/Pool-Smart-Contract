@@ -145,12 +145,14 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param from The address to redeem tokens from.
     /// @param amount The amount of tokens to redeem for assets.
 
-    function _withdrawFromPool(address from, uint256 amount) internal {  // Remember to enforce security here later
+    function withdrawFromPool(address from, uint256 amount) public {  // Remember to enforce security here later
         _burnFairyFromUser(from, amount);
         uint256 redeemed = _redeem(amount);  // Recovers amount from yield source.
-         payable(from).transfer(redeemed);
+        payable(from).transfer(redeemed); // Transfer asset (eth) to the user withdrawing from the pool. Not fully implemented. 
         emit Withdrawal(_msgSender(), from, amount, redeemed);
     }
+
+    
     
     // Not fully implemented function.
     function _redeem(uint amount) pure internal returns(uint256) {
