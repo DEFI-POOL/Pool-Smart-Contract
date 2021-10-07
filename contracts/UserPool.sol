@@ -137,9 +137,11 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param from The address to redeem tokens from.
     /// @param amount The amount of tokens to redeem for assets.
 
-    function withdrawFromPool(address from, uint256 amount) public {
+    function withdrawFromPool(address from, uint256 amount) public {  // Remember to enforce security here later
 
-         _burnFairyFromUser(from, amount);
+        _burnFairyFromUser(from, amount);
+
+        emit Withdrawal(_msgSender(), from, amount, redeemed);
     }
     
     function _burnFairyFromUser(address from, uint256 amount) internal {
