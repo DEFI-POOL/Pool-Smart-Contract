@@ -45,6 +45,9 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     /// @dev Contract address of the underlining asset.
     address internal _BaseAsset = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
+
+    /// @dev  Address than receives all depostis and supplies it to yield source.
+    address depositReserve = 0xdD870fA1b7C4700F2BD7f44238821C26f7392148;
 /// ==========================================================================
 
 
@@ -90,17 +93,14 @@ contract UserPool is Ownable, ReentrancyGuard {
         emit LiquidityCapSet(_liquidityCap);
     }
 
-
-   
     
-    /// @notice Deposit assets into the UserPool in exchange for FairyTokens.
+    /// @notice Deposit assets into the UserPool in exchange for FairyTokens as tickets.
     /// @param to The address receiving the newly minted FairyTokens.
     /// @param amount The amount of assets to deposit.
 
-    function depositTo(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
-        address operator = msg.sender;
-        _BaseAsset.safeTransferFrom(operator, address(this), amount);
-        _mint(to, amount);
+    function depositToPool(address to, uint256 amount ) external nonReentrant  canAddLiquidity(amount){
+        payable(depositReserve).transfer(msg.value);
+        
         _supply(amount);
 
         emit Deposited(operator, to, amount);
