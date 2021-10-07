@@ -59,8 +59,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     /// @dev Emitted when an instance is initialized
     event Initialized(
-        address reserveRegistry,
-        uint256 maxExitFee
+        address reserveRegistry
     );
 
     /// @dev Event emitted when assets are deposited
