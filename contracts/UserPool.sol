@@ -141,6 +141,10 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     }
     
+    function _burnFairyFromUser(address from, uint256 amount) internal {
+        _burn(from, amount);
+    }
+
     function _burn(address from, uint256 amount) internal {
         fairyContract = Fairy(_token);
         fairyContract.burn(from, amount);
