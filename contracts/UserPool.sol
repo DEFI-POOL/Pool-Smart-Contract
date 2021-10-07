@@ -65,8 +65,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     /// @dev Event emitted when assets are deposited
     event Deposited(
-        address indexed operator,
-        address indexed to,
+        address to,
         uint256 amount
     );
 
