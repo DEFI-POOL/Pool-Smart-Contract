@@ -38,10 +38,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev Reserve to which reserve fees are sent
     address public reserveRegistry;
 
-    /// @dev The maximum possible exit fee fraction as a fixed point 18 number.
-    /// For example, if the maxExitFeeMantissa is "0.1 ether", then the maximum exit fee for a withdrawal of 100 Dai will be 10 Dai
-    uint256 public maxExitFee;
-
 // Remember to update these addresses to actual contract address. Below are just place holder addresses.
 /// ==========================================================================
     /// @dev Contract address of controlled Fairytoken. 
