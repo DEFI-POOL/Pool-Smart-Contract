@@ -8,5 +8,5 @@ abstract contract Fairy is ERC20{
     
     function mint(address _user, uint amount) public {}
     
-    function Burn(address _user, uint256 _amount) external virtual {}
+    function burn(address _user, uint256 _amount) external virtual {}
 }

@@ -141,6 +141,10 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     }
     
+    function _burn(address from, uint256 amount) internal {
+        fairyContract = Fairy(_token);
+        fairyContract.burn(from, amount);
+    }
 
     /// @notice Called by the prize strategy to award prizes.
     /// @dev The amount awarded must be less than the awardBalance()
