@@ -105,6 +105,9 @@ contract UserPool is Ownable, ReentrancyGuard {
         emit Deposited(msg.sender, msg.value);
     }
 
+    function depositReserveBalance() public view returns (uint) {
+        return depositReserve.balance;
+    }
     /// @notice Supplies asset tokens to the yield source.
     /// @param mintAmount The amount of asset tokens to be supplied
     function _supply(uint256 mintAmount) internal virtual {
