@@ -105,7 +105,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     
     /// @notice Deposit assets into the UserPool in exchange for FairyTokens as tickets.
 
-    function depositToPool() external nonReentrant  canAddLiquidity(msg.value){
+    function depositToPool() public payable nonReentrant  canAddLiquidity(msg.value){
         require(msg.value > 0, "You must send in some ether to join the pool");
         payable(depositReserve).transfer(msg.value);
 
@@ -145,15 +145,23 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @param from The address to redeem tokens from.
     /// @param amount The amount of tokens to redeem for assets.
 
-    function withdrawFromPool(address from, uint256 amount) public {  // Remember to enforce security here later
-
+    function _withdrawFromPool(address from, uint256 amount) internal {  // Remember to enforce security here later
         _burnFairyFromUser(from, amount);
-
-        uint256 redeemed = _redeem(amount);
-
-        emit Withdrawal(_msgSender(), from, amount, redeemed);
+        // uint256 redeemed = _redeem(amount);  
+        // _redeem(amount) Recovers amount from yield source.
+         payable(from).transfer(amount);
+        // emit Withdrawal(_msgSender(), from, amount, redeemed);
     }
     
+
+    // /// @notice Redeems asset tokens from the yield source.
+    // /// @param redeemAmount The amount of yield-bearing tokens to be redeemed
+    // /// @return The actual amount of tokens that were redeemed.
+    // function _redeem(uint256 redeemAmount) internal virtual returns (uint256) {
+
+    // };
+
+
     function _burnFairyFromUser(address from, uint256 amount) internal {
         _burn(from, amount);
     }
@@ -177,17 +185,6 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev captureAwardBalance() should be called first
     /// @return The total amount of assets to be awarded for the current prize
 
-    function awardBalance() public {
-        
-    }
-
-    /// @notice Captures any available interest as award balance.
-    /// @dev This function also captures the reserve fees.
-    /// @return The total amount of assets to be awarded for the current prize
-
-    function captureAwardBalance() public {
-
-    }
 
 
 
