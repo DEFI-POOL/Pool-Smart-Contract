@@ -70,8 +70,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     );
 
     /// @notice Initializes the User Pool.
-    /// @param _controlledToken Address ControlledToken that is controlled by this User Pool.
-    /// @param _maxExitFee The maximum exit fee size where applicable.
+    /// @param _reserveRegistry Reserve to which reserve fees are sent.
     /// @dev Reserve to which reserve fees are sent.
     
     constructor (address _reserveRegistry) {
