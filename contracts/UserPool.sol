@@ -41,7 +41,8 @@ contract UserPool is Ownable, ReentrancyGuard {
 // Remember to update these addresses to actual contract address. Below are just place holder addresses.
 /// ==========================================================================
     /// @dev Contract address of controlled Fairytoken. 
-    address internal _FairyToken = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+    Fairy fairyContract;
+    address internal _token = 0x0fC5025C764cE34df352757e82f7B5c4Df39A836;
 
     /// @dev Contract address of the underlining asset.
     address internal _BaseAsset = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
