@@ -139,6 +139,7 @@ contract UserPool is Ownable, ReentrancyGuard {
 
     function withdrawFromPool(address from, uint256 amount) public {
 
+         _burnFairyFromUser(from, amount);
     }
     
     function _burnFairyFromUser(address from, uint256 amount) internal {
