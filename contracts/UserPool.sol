@@ -48,7 +48,7 @@ contract UserPool is Ownable, ReentrancyGuard {
     /// @dev Contract address of the underlining asset.
     address internal _BaseAsset = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
 
-    /// @dev  Address than receives all depostis and supplies it to yield source.
+    /// @dev  Address that receives all depostis and supplies it to yield source.
     address depositReserve = 0xdD870fA1b7C4700F2BD7f44238821C26f7392148;
 /// ==========================================================================
 
